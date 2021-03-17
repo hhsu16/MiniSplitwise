@@ -11,3 +11,11 @@ module.exports = {
     idle: 10000,
   },
 };
+
+// // create db connection
+// const db = mysql.createConnection({
+//   host: "localhost",
+//   user: "root",
+//   password: "",
+//   database: "nodemysql",
+// });
