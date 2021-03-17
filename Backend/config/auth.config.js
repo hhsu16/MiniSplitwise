@@ -1,3 +1,3 @@
 module.exports = {
-  secret: "encry-secret-key",
+  secret: "encrp-secret-key",
 };
