@@ -17,11 +17,13 @@ const db = require("./models");
 const Role = db.role;
 
 // db.sequelize.sync();
+
+//development
 db.sequelize.sync({ force: true }).then(() => {
   console.log("Drop and resync Db");
   initial();
 });
-
+// development
 function initial() {
   Role.create({
     id: 1,

@@ -22,6 +22,10 @@ db.sequelize = sequelize;
 db.user = require("../models/user.model.js")(sequelize, Sequelize);
 db.role = require("../models/role.model.js")(sequelize, Sequelize);
 
+db.bill = require("../models/bill.model.js")(sequelize, Sequelize);
+db.friendship = require("../models/friendship.model.js")(sequelize, Sequelize);
+db.group = require("../models/group.model.js")(sequelize, Sequelize);
+
 // different role can be taken many users
 db.role.belongsToMany(db.user, {
   through: "user_roles",
