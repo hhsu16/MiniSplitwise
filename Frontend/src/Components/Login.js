@@ -1,7 +1,8 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
 import axios from "axios";
 import { login } from "../features/userSlice";
+import { useDispatch } from "react-redux";
+
 const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -31,7 +32,6 @@ const Login = () => {
             })
           );
         }
-        // console.log(response.data);
       });
   };
 
@@ -41,7 +41,6 @@ const Login = () => {
         <h1>Log in</h1>
         <input
           type="text"
-          value={username}
           placeholder="Username..."
           onChange={(e) => {
             setUsername(e.target.value);
@@ -49,7 +48,6 @@ const Login = () => {
         />
         <input
           type="text"
-          value={password}
           placeholder="Password..."
           onChange={(e) => {
             setPassword(e.target.value);
@@ -57,7 +55,6 @@ const Login = () => {
         />
         <button onClick={loginIn}>Submit</button>
       </div>
-
       <h1>{loginStatus}</h1>
     </div>
   );

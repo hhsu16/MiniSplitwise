@@ -2,6 +2,7 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import { logout, selectUser } from "../features/userSlice";
+import { Redirect } from "react-router-dom";
 
 const Logout = () => {
   const dispatch = useDispatch();
@@ -11,12 +12,14 @@ const Logout = () => {
     e.preventDefault();
 
     dispatch(logout());
+
+    return <Redirect to="/login" />;
   };
 
   return (
     <div>
       <h1>
-        Welcome <span className="user_name">{user.username}</span>
+        Welcome!
         <button className="logout_button" onClick={(e) => handleLogout(e)}>
           Logout
         </button>
