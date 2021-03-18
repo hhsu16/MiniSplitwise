@@ -3,9 +3,6 @@ module.exports = (sequelize, Sequelize) => {
     ownName: {
       type: Sequelize.STRING,
     },
-    billId: {
-      type: Sequelize.INTEGER,
-    },
     price: {
       type: Sequelize.INTEGER,
     },
@@ -14,9 +11,6 @@ module.exports = (sequelize, Sequelize) => {
     },
     oweName: {
       type: Sequelize.STRING,
-    },
-    groupId: {
-      type: Sequelize.INTEGER,
     },
   });
 

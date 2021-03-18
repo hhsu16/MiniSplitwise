@@ -1,7 +1,7 @@
 const db = require("../models");
 const config = require("../config/auth.config");
 const User = db.user;
-const Role = db.role;
+const Friendship = db.friendship;
 
 const Op = db.Sequelize.Op;
 
@@ -15,25 +15,8 @@ exports.signup = (req, res) => {
     email: req.body.email,
     password: bcrypt.hashSync(req.body.password, 8),
   })
-    .then((user) => {
-      if (req.body.roles) {
-        Role.findAll({
-          where: {
-            name: {
-              [Op.or]: req.body.roles,
-            },
-          },
-        }).then((roles) => {
-          user.setRoles(roles).then(() => {
-            res.send({ message: "User was registered successfully!" });
-          });
-        });
-      } else {
-        // user role = 1
-        user.setRoles([1]).then(() => {
-          res.send({ message: "User was registered successfully!" });
-        });
-      }
+    .then(() => {
+      res.send({ message: "User was registered successfully!" });
     })
     .catch((err) => {
       res.status(500).send({ message: err.message });
@@ -67,21 +50,29 @@ exports.signin = (req, res) => {
         expiresIn: 86400, // 24 hours
       });
 
-      var authorities = [];
-      user.getRoles().then((roles) => {
-        for (let i = 0; i < roles.length; i++) {
-          authorities.push("ROLE_" + roles[i].name.toUpperCase());
-        }
-        res.status(200).send({
-          id: user.id,
-          username: user.username,
-          email: user.email,
-          roles: authorities,
-          accessToken: token,
-        });
+      res.status(200).send({
+        id: user.id,
+        username: user.username,
+        email: user.email,
+        accessToken: token,
       });
     })
     .catch((err) => {
       res.status(500).send({ message: err.message });
+    });
+};
+
+exports.createFriendship = (friendshipId, friend) => {
+  return Friendship.create({
+    name: friend.name,
+    email: friend.email,
+    friendshipId: friendshipId,
+  })
+    .then((friend) => {
+      console.log(">> Created friend: " + JSON.stringify(friend, null, 4));
+      return comment;
+    })
+    .catch((err) => {
+      console.log(">> Error while creating friend: ", err);
     });
 };

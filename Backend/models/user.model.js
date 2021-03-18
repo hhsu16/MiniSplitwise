@@ -9,12 +9,6 @@ module.exports = (sequelize, Sequelize) => {
     password: {
       type: Sequelize.STRING,
     },
-    friendshipId: {
-      type: Sequelize.INTEGER,
-    },
-    groupId: {
-      type: Sequelize.INTEGER,
-    },
   });
 
   return User;
