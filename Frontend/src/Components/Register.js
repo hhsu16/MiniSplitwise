@@ -1,5 +1,6 @@
 import React, { useState, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import logo from "../images/logo.png";
 
 import Form from "react-validation/build/form";
 import Input from "react-validation/build/input";
@@ -94,19 +95,27 @@ const Register = () => {
   };
 
   return (
-    <div className="col-md-12">
-      <div className="card card-container">
-        <img
-          src="//ssl.gstatic.com/accounts/ui/avatar_2x.png"
-          alt="profile-img"
-          className="profile-img-card"
-        />
-
+    <div
+      className="col-md-12"
+      style={{
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        height: "70vh",
+      }}
+    >
+      <img style={{ width: 200, height: 200, marginRight: 50 }} src={logo} />
+      <div>
         <Form onSubmit={handleRegister} ref={form}>
+          <h1 style={{ color: "grey", fontSize: 16, fontWeight: "blod" }}>
+            INTRODUCE YOURSELF
+          </h1>
           {!successful && (
-            <div>
-              <div className="form-group">
-                <label htmlFor="username">Username</label>
+            <div className="form-group">
+              <div>
+                <label htmlFor="username" style={{ fontSize: 24 }}>
+                  Hi there! My name is
+                </label>
                 <Input
                   type="text"
                   className="form-control"
@@ -118,7 +127,10 @@ const Register = () => {
               </div>
 
               <div className="form-group">
-                <label htmlFor="email">Email</label>
+                <label htmlFor="email">
+                  Here's my{" "}
+                  <span style={{ fontWeight: "bold" }}>email address:</span>
+                </label>
                 <Input
                   type="text"
                   className="form-control"
@@ -130,7 +142,10 @@ const Register = () => {
               </div>
 
               <div className="form-group">
-                <label htmlFor="password">Password</label>
+                <label htmlFor="password">
+                  And here's my{" "}
+                  <span style={{ fontWeight: "bold" }}>password:</span>
+                </label>
                 <Input
                   type="password"
                   className="form-control"
@@ -142,7 +157,19 @@ const Register = () => {
               </div>
 
               <div className="form-group">
-                <button className="btn btn-primary btn-block">Sign Up</button>
+                <button
+                  style={{
+                    background: "#FF652F",
+                    borderWidth: 0,
+                    width: 200,
+                    height: 42,
+                    borderRadius: 3,
+                  }}
+                >
+                  <span style={{ color: "white", fontSize: 18 }}>
+                    Sign me up!
+                  </span>
+                </button>
               </div>
             </div>
           )}

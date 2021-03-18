@@ -1,6 +1,7 @@
 import React, { useState, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Redirect } from "react-router-dom";
+import logo from "../images/logo.png";
 
 import Form from "react-validation/build/form";
 import Input from "react-validation/build/input";
@@ -67,15 +68,21 @@ const Login = (props) => {
   }
 
   return (
-    <div className="col-md-12">
-      <div className="card card-container">
-        <img
-          src="//ssl.gstatic.com/accounts/ui/avatar_2x.png"
-          alt="profile-img"
-          className="profile-img-card"
-        />
-
+    <div
+      className="col-md-12"
+      style={{
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        height: "70vh",
+      }}
+    >
+      <img style={{ width: 200, height: 200, marginRight: 50 }} src={logo} />
+      <div>
         <Form onSubmit={handleLogin} ref={form}>
+          <h1 style={{ color: "grey", fontSize: 16, fontWeight: "blod" }}>
+            WELCOME TO SPLITWISE
+          </h1>
           <div className="form-group">
             <label htmlFor="username">Username</label>
             <Input
@@ -101,11 +108,20 @@ const Login = (props) => {
           </div>
 
           <div className="form-group">
-            <button className="btn btn-primary btn-block" disabled={loading}>
+            <button
+              disabled={loading}
+              style={{
+                background: "#FF652F",
+                borderWidth: 0,
+                width: 90,
+                height: 42,
+                borderRadius: 3,
+              }}
+            >
               {loading && (
                 <span className="spinner-border spinner-border-sm"></span>
               )}
-              <span>Login</span>
+              <span style={{ color: "white", fontSize: 18 }}>Login</span>
             </button>
           </div>
 

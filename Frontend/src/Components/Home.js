@@ -1,4 +1,7 @@
 import React, { useState, useEffect } from "react";
+import bV from "../images/backgroundVideo.mp4";
+
+import "../App.css";
 
 import UserService from "../services/user.service";
 
@@ -22,10 +25,10 @@ const Home = () => {
   }, []);
 
   return (
-    <div className="container">
-      <header className="jumbotron">
-        <h3>{content}</h3>
-      </header>
+    <div className="hero-container">
+      <video autoPlay loop muted>
+        <source src={bV} type="video/mp4" />
+      </video>
     </div>
   );
 };

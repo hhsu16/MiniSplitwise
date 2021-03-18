@@ -11,6 +11,7 @@ import Register from "./components/Register";
 import Home from "./components/Home";
 import Profile from "./components/Profile";
 import BoardUser from "./components/BoardUser";
+import Dashboard from "./components/Dashboard";
 
 import { logout } from "./actions/auth";
 import { clearMessage } from "./actions/message";
@@ -34,7 +35,10 @@ const App = () => {
   return (
     <Router history={history}>
       <div>
-        <nav className="navbar navbar-expand ">
+        <nav
+          className="navbar navbar-expand "
+          style={{ backgroundColor: "#1CC29F" }}
+        >
           <Link
             to={"/"}
             className="navbar-brand"
@@ -50,6 +54,8 @@ const App = () => {
                 width: 45,
                 height: 45,
                 marginRight: 10,
+                borderWidth: 2,
+                borderColor: "white",
               }}
             />
             Splitwise
@@ -57,15 +63,23 @@ const App = () => {
           <div className="navbar-nav mr-auto">
             {currentUser && (
               <li className="nav-item">
-                <Link to={"/profile"} className="nav-link">
+                <Link
+                  to={"/dashboard"}
+                  style={{ color: "white", fontWeight: "bold" }}
+                  className="nav-link"
+                >
                   Dashboard
                 </Link>
               </li>
             )}
             {currentUser && (
               <li className="nav-item">
-                <Link to={"/user"} className="nav-link">
-                  User
+                <Link
+                  to={"/user"}
+                  style={{ color: "white", fontWeight: "bold" }}
+                  className="nav-link"
+                >
+                  Activity
                 </Link>
               </li>
             )}
@@ -74,24 +88,35 @@ const App = () => {
           {currentUser ? (
             <div className="navbar-nav ml-auto">
               <li className="nav-item">
-                <Link to={"/profile"} className="nav-link">
+                <Link
+                  to={"/profile"}
+                  style={{ color: "white", fontWeight: "bold", marginTop: 8 }}
+                  className="nav-link"
+                >
                   {currentUser.username}
                 </Link>
               </li>
               <li className="nav-item">
-                <a href="/login" className="nav-link" onClick={logOut}>
-                  LogOut
-                </a>
+                <button type="button" class="custom-btn">
+                  <a
+                    href="/login"
+                    className="nav-link"
+                    style={{ color: "white", fontWeight: "bold" }}
+                    onClick={logOut}
+                  >
+                    Log out
+                  </a>
+                </button>
               </li>
             </div>
           ) : (
             <div className="navbar-nav ml-auto">
               <li className="nav-item">
-                <button type="button" class="btn btn-light">
+                <button type="button" class="btn btn-link">
                   <Link
                     to={"/login"}
                     className="nav-link"
-                    style={{ color: "#1CC29F", fontWeight: "bold" }}
+                    style={{ color: "white", fontWeight: "bold" }}
                   >
                     Login
                   </Link>
@@ -100,8 +125,12 @@ const App = () => {
 
               <li className="nav-item">
                 <button type="button" class="custom-btn">
-                  <Link to={"/register"} className="nav-link">
-                    Sign Up
+                  <Link
+                    to={"/register"}
+                    className="nav-link"
+                    style={{ color: "white", fontWeight: "bold" }}
+                  >
+                    Sign up
                   </Link>
                 </button>
               </li>
@@ -115,6 +144,7 @@ const App = () => {
             <Route exact path="/login" component={Login} />
             <Route exact path="/register" component={Register} />
             <Route exact path="/profile" component={Profile} />
+            <Route exact path="/dashboard" component={Dashboard} />
             <Route path="/user" component={BoardUser} />
           </Switch>
         </div>
