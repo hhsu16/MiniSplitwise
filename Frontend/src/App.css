@@ -22,6 +22,7 @@ label {
 }
 
 .custom-btn {
+  /* orange */
   /* #FF652F */
   background: rgb(255, 101, 47);
   border: 0px;
@@ -29,6 +30,8 @@ label {
   padding: 7px 10px;
   margin-left: 10px;
   margin-right: 100px;
+  /* green */
+  /* #1CC29F */
 }
 
 video {

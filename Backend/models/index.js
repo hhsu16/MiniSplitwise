@@ -20,7 +20,6 @@ db.Sequelize = Sequelize;
 db.sequelize = sequelize;
 
 db.user = require("../models/user.model.js")(sequelize, Sequelize);
-db.bill = require("../models/bill.model.js")(sequelize, Sequelize);
 db.friendship = require("../models/friendship.model.js")(sequelize, Sequelize);
 db.group = require("../models/group.model.js")(sequelize, Sequelize);
 
@@ -29,18 +28,5 @@ db.friendship.belongsTo(db.user, {
   foreignKey: "friendshipId",
   as: "friend",
 });
-
-// different role can be taken many users
-// db.role.belongsToMany(db.user, {
-//   through: "user_roles",
-//   foreignKey: "roleId",
-//   otherKey: "userId",
-// });
-// user can belong many roles
-// db.user.belongsToMany(db.role, {
-//   through: "user_roles",
-//   foreignKey: "userId",
-//   otherKey: "roleId",
-// });
 
 module.exports = db;

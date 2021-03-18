@@ -9,6 +9,9 @@ module.exports = (sequelize, Sequelize) => {
     password: {
       type: Sequelize.STRING,
     },
+    phoneNumber: {
+      type: Sequelize.INTEGER,
+    },
   });
 
   return User;

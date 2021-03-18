@@ -6,6 +6,21 @@ module.exports = (sequelize, Sequelize) => {
     email: {
       type: Sequelize.STRING,
     },
+    billId: {
+      type: Sequelize.INTEGER,
+    },
+    ownName: {
+      type: Sequelize.STRING,
+    },
+    price: {
+      type: Sequelize.INTEGER,
+    },
+    discription: {
+      type: Sequelize.STRING,
+    },
+    oweName: {
+      type: Sequelize.STRING,
+    },
   });
 
   return Friendship;

@@ -9,11 +9,11 @@ var jwt = require("jsonwebtoken");
 var bcrypt = require("bcryptjs");
 
 exports.signup = (req, res) => {
-  // Save User to Database
   User.create({
     username: req.body.username,
     email: req.body.email,
     password: bcrypt.hashSync(req.body.password, 8),
+    phoneNumber: 0,
   })
     .then(() => {
       res.send({ message: "User was registered successfully!" });
@@ -55,6 +55,7 @@ exports.signin = (req, res) => {
         username: user.username,
         email: user.email,
         accessToken: token,
+        phoneNumber: user.phoneNumber,
       });
     })
     .catch((err) => {
