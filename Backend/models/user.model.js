@@ -10,7 +10,16 @@ module.exports = (sequelize, Sequelize) => {
       type: Sequelize.STRING,
     },
     phoneNumber: {
-      type: Sequelize.INTEGER,
+      type: Sequelize.STRING,
+    },
+    type: {
+      type: Sequelize.STRING,
+    },
+    pname: {
+      type: Sequelize.STRING,
+    },
+    data: {
+      type: Sequelize.BLOB("long"),
     },
   });
 

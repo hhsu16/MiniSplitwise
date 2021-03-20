@@ -1,9 +1,13 @@
-module.exports = (app) => {
-  const users = require("../controllers/user.controller.js");
+// const users = require("../controllers/user.controller.js");
 
-  var router = require("express").Router();
+// module.exports = (app) => {
+//   app.use(function (req, res, next) {
+//     res.header(
+//       "Access-Control-Allow-Headers",
+//       "x-access-token, Origin, Content-Type, Accept"
+//     );
+//     next();
+//   });
 
-  router.put("/updateProfile", users.update);
-
-  app.use("/api/users", router);
-};
+//   app.put("/updateUserProfile", users.updateUserProfile);
+// };

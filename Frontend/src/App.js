@@ -12,6 +12,7 @@ import Home from "./components/Home";
 import Profile from "./components/Profile";
 import BoardUser from "./components/BoardUser";
 import Dashboard from "./components/Dashboard";
+import ProfileUpdate from "./components/ProfileUpdate";
 
 import { logout } from "./actions/auth";
 import { clearMessage } from "./actions/message";
@@ -93,11 +94,11 @@ const App = () => {
                   style={{ color: "white", fontWeight: "bold", marginTop: 8 }}
                   className="nav-link"
                 >
-                  {currentUser.username}
+                  Profile
                 </Link>
               </li>
               <li className="nav-item">
-                <button type="button" class="custom-btn">
+                <button type="button" className="custom-btn">
                   <a
                     href="/login"
                     className="nav-link"
@@ -112,7 +113,7 @@ const App = () => {
           ) : (
             <div className="navbar-nav ml-auto">
               <li className="nav-item">
-                <button type="button" class="btn btn-link">
+                <button type="button" className="btn btn-link">
                   <Link
                     to={"/login"}
                     className="nav-link"
@@ -124,7 +125,7 @@ const App = () => {
               </li>
 
               <li className="nav-item">
-                <button type="button" class="custom-btn">
+                <button type="button" className="custom-btn">
                   <Link
                     to={"/register"}
                     className="nav-link"
@@ -144,6 +145,7 @@ const App = () => {
             <Route exact path="/login" component={Login} />
             <Route exact path="/register" component={Register} />
             <Route exact path="/profile" component={Profile} />
+            <Route exact path="/profileUpdate" component={ProfileUpdate} />
             <Route exact path="/dashboard" component={Dashboard} />
             <Route path="/user" component={BoardUser} />
           </Switch>

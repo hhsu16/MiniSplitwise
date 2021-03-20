@@ -62,18 +62,3 @@ exports.signin = (req, res) => {
       res.status(500).send({ message: err.message });
     });
 };
-
-exports.createFriendship = (friendshipId, friend) => {
-  return Friendship.create({
-    name: friend.name,
-    email: friend.email,
-    friendshipId: friendshipId,
-  })
-    .then((friend) => {
-      console.log(">> Created friend: " + JSON.stringify(friend, null, 4));
-      return comment;
-    })
-    .catch((err) => {
-      console.log(">> Error while creating friend: ", err);
-    });
-};
