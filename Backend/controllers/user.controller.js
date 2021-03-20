@@ -45,6 +45,7 @@ exports.updateUserProfile = (req, res) => {
           email: u.email,
           accessToken: token,
           phoneNumber: u.phoneNumber,
+          imageData: u.pname,
         });
       });
     })

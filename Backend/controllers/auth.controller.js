@@ -56,6 +56,7 @@ exports.signin = (req, res) => {
         email: user.email,
         accessToken: token,
         phoneNumber: user.phoneNumber,
+        imageData: user.pname,
       });
     })
     .catch((err) => {
