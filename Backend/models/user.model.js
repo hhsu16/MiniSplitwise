@@ -21,6 +21,15 @@ module.exports = (sequelize, Sequelize) => {
     data: {
       type: Sequelize.BLOB("long"),
     },
+    currencyType: {
+      type: Sequelize.STRING,
+    },
+    languageType: {
+      type: Sequelize.STRING,
+    },
+    timezoneType: {
+      type: Sequelize.STRING,
+    },
   });
 
   return User;

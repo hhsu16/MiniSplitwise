@@ -8,7 +8,6 @@ import {
 } from "./types";
 
 import AuthService from "../services/auth.service";
-import UserService from "../services/user.service";
 
 export const register = (username, email, password) => (dispatch) => {
   return AuthService.register(username, email, password).then(
@@ -85,45 +84,3 @@ export const logout = () => (dispatch) => {
     type: LOGOUT,
   });
 };
-
-// export const updateUserProfile = (
-//   username,
-//   newUsername,
-//   email,
-//   phoneNumber
-// ) => (dispatch) => {
-//   return UserService.updateUserProfile(
-//     username,
-//     newUsername,
-//     email,
-//     phoneNumber
-//   ).then(
-//     (data) => {
-//       dispatch({
-//         type: UPDATEPROFILE_SUCCESS,
-//         payload: { user: data },
-//       });
-
-//       return Promise.resolve();
-//     },
-//     (error) => {
-//       const message =
-//         (error.response &&
-//           error.response.data &&
-//           error.response.data.message) ||
-//         error.message ||
-//         error.toString();
-
-//       dispatch({
-//         type: UPDATEPROFILE_FAIL,
-//       });
-
-//       dispatch({
-//         type: SET_MESSAGE,
-//         payload: message,
-//       });
-
-//       return Promise.reject();
-//     }
-//   );
-// };

@@ -38,6 +38,8 @@ app.use(express.json({ limit: "25mb" }));
 const db = require("./models");
 const User = db.user;
 
+app.post("/addExpense", async (req, res) => {});
+
 app.post("/uploadImage", async (req, res) => {
   const { name, data, mimetype } = req.files.file;
   // let type = req.file.mimetype;
@@ -60,6 +62,9 @@ app.post("/uploadImage", async (req, res) => {
           accessToken: u.password,
           phoneNumber: u.phoneNumber,
           imageData: name,
+          currencyType: u.currencyType,
+          languageType: u.languageType,
+          timezoneType: u.timezoneType,
         });
       });
       // res.send("ok");
@@ -84,7 +89,48 @@ app.get("/getImage", async (req, res) => {
       accessToken: user.password,
       phoneNumber: user.phoneNumber,
       imageData: user.data,
+      currencyType: user.currencyType,
+      languageType: user.languageType,
+      timezoneType: user.timezoneType,
     });
+  });
+});
+
+app.post("/updateDropdown", async (req, res) => {
+  console.log(
+    "\n\n\nserver" +
+      req.body.currencyType +
+      " " +
+      req.body.languageType +
+      " " +
+      req.body.timezoneType
+  );
+
+  User.update(
+    {
+      currencyType: req.body.currencyType,
+      languageType: req.body.languageType,
+      timezoneType: req.body.timezoneType,
+    },
+    { where: { username: req.body.username } }
+  ).then(() => {
+    User.findOne({ where: { username: req.body.username } })
+      .then((u) => {
+        res.status(200).send({
+          id: u.id,
+          username: u.username,
+          email: u.email,
+          accessToken: u.password,
+          phoneNumber: u.phoneNumber,
+          imageData: u.imageData,
+          currencyType: u.currencyType,
+          languageType: u.languageType,
+          timezoneType: u.timezoneType,
+        });
+      })
+      .catch((err) => {
+        res.sendStatus(400).send("err message: " + err);
+      });
   });
 });
 

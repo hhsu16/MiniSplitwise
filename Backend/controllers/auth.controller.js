@@ -57,6 +57,9 @@ exports.signin = (req, res) => {
         accessToken: token,
         phoneNumber: user.phoneNumber,
         imageData: user.pname,
+        currencyType: user.currencyType,
+        languageType: user.languageType,
+        timezoneType: user.timezoneType,
       });
     })
     .catch((err) => {

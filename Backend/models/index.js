@@ -29,4 +29,10 @@ db.friendship.belongsTo(db.user, {
   as: "friend",
 });
 
+db.user.hasMany(db.group, { as: "group" });
+db.group.belongsTo(db.user, {
+  foreignKey: "groupId",
+  as: "group",
+});
+
 module.exports = db;

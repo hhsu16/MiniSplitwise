@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Redirect, Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import TimezoneSelect from "react-timezone-select";
+import authHeader from "../services/auth-header";
 
 import "../App.css";
 import axios from "axios";
@@ -9,7 +10,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import Dropdown from "react-dropdown";
 import "react-dropdown/style.css";
 
-const Profile = () => {
+const Profile = (props) => {
   const { user: currentUser } = useSelector((state) => state.auth);
   const options = ["USD", "KWD", "BHD", "GBP", "EUR", "CAD"];
   const optionsLan = [
@@ -21,12 +22,15 @@ const Profile = () => {
     "French",
   ];
   const [selectedTimezone, setSelectedTimezone] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const [previewFile, setPreviewFile] = useState();
   const [currency, setCurrency] = useState(options[0]);
   const [lan, setLan] = useState(optionsLan[0]);
 
   const [file, setFile] = useState(currentUser.imageData);
+  const defaultOption = options[0];
+  const defaultOptionLan = optionsLan[0];
 
   const dispatch = useDispatch();
 
@@ -36,15 +40,20 @@ const Profile = () => {
     setFile(f);
   };
 
-  const onChangeCurrency = (e) => {
-    let f = e.target;
-    setCurrency(f);
-  };
+  // const onChangeCurrency = (e) => {
+  //   let f = e.target;
+  //   setCurrency(f);
+  // };
 
-  const onChangeLan = (e) => {
-    let f = e.target;
-    setLan(f);
-  };
+  // const onChangeLan = (e) => {
+  //   let f = e.target;
+  //   setLan(f);
+  // };
+
+  // const onChangeSelectedTimezone = (e) => {
+  //   let tz = e.target;
+  //   setSelectedTimezone(tz);
+  // };
 
   const fileUploadHandler = () => {
     let formData = new FormData();
@@ -71,6 +80,44 @@ const Profile = () => {
       })
       .catch((err) => {
         console.log(err);
+      });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setLoading(true);
+
+    let formData = new FormData();
+
+    var data = {
+      username: currentUser.username,
+      currencyType: currency.value,
+      languageType: lan.value,
+      timezoneType: JSON.stringify(selectedTimezone, null, 2),
+    };
+    for (let i in data) {
+      formData.append(i, data[i]);
+    }
+
+    axios
+      .post("http://localhost:8080/updateDropdown", formData, {
+        headers: authHeader(),
+      })
+      .then((response) => {
+        if (response.status === 200) {
+          localStorage.setItem("user", JSON.stringify(response.data));
+          dispatch({
+            type: "LOGIN_SUCCESS",
+            payload: { user: response.data },
+          });
+          alert("All drop down is updated in db");
+          props.history.push("/profile");
+        } else {
+          alert("status not 200");
+        }
+      })
+      .catch(() => {
+        setLoading(false);
       });
   };
 
@@ -119,34 +166,33 @@ const Profile = () => {
           {currentUser.accessToken.substr(currentUser.accessToken.length - 20)}
         </p>
       </div>
-
       <div>
         <p>
-          <strong>Your default currency:</strong>{" "}
+          <strong>My current currency type: </strong> {currentUser.currencyType}
+          <strong>{"\n"}Your default currency:</strong>{" "}
           <Dropdown
             options={options}
-            onChange={onChangeCurrency}
-            value={options[0]}
+            onChange={setCurrency}
+            value={defaultOption}
             placeholder="Select an currency option"
           />
         </p>
       </div>
-
       <div>
         <p>
-          <strong>Your default language:</strong>{" "}
+          <strong>My default language:</strong> {currentUser.languageType}
+          <strong>{"\n"}Your default language:</strong>{" "}
           <Dropdown
             options={optionsLan}
-            onChange={onChangeLan}
-            value={optionsLan[0]}
+            onChange={setLan}
+            value={defaultOptionLan}
             placeholder="Select an language option"
           />
         </p>
       </div>
-
-      <strong>Please make a time zone selection</strong>
+      <strong>My default language:</strong> {currentUser.timezoneType}
+      <strong>{"\n"}Please make a time zone selection</strong>
       <TimezoneSelect value={selectedTimezone} onChange={setSelectedTimezone} />
-
       <button type="button" class="custom-btn">
         <Link
           to={"/profileUpdate"}
@@ -156,18 +202,12 @@ const Profile = () => {
           Edit Profile
         </Link>
       </button>
-
       <button
         type="button"
         style={{ backgroundColor: "#1CC29F", borderRadius: 3, borderWidth: 0 }}
+        onClick={handleSubmit}
       >
-        <Link
-          to={"/profileUpdate"}
-          className="nav-link"
-          style={{ color: "white", fontWeight: "bold" }}
-        >
-          Save Dropdown buttom
-        </Link>
+        Save Dropdown Options
       </button>
     </div>
   );

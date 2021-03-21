@@ -52,7 +52,7 @@ const Login = (props) => {
     if (checkBtn.current.context._errors.length === 0) {
       dispatch(login(username, password))
         .then(() => {
-          props.history.push("/profile");
+          props.history.push("/");
           window.location.reload();
         })
         .catch(() => {
@@ -64,7 +64,7 @@ const Login = (props) => {
   };
 
   if (isLoggedIn) {
-    return <Redirect to="/profile" />;
+    return <Redirect to="/" />;
   }
 
   return (
@@ -77,7 +77,11 @@ const Login = (props) => {
         height: "70vh",
       }}
     >
-      <img style={{ width: 200, height: 200, marginRight: 50 }} src={logo} />
+      <img
+        alt="description of logo"
+        style={{ width: 200, height: 200, marginRight: 50 }}
+        src={logo}
+      />
       <div>
         <Form onSubmit={handleLogin} ref={form}>
           <h1 style={{ color: "grey", fontSize: 16, fontWeight: "blod" }}>

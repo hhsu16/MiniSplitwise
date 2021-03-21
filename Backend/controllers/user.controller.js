@@ -46,6 +46,9 @@ exports.updateUserProfile = (req, res) => {
           accessToken: token,
           phoneNumber: u.phoneNumber,
           imageData: u.pname,
+          currencyType: u.currencyType,
+          languageType: u.languageType,
+          timezoneType: u.timezoneType,
         });
       });
     })

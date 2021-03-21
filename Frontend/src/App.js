@@ -6,6 +6,7 @@ import logo from "./images/logo.png";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 
+import GroupPage from "./components/GroupPage";
 import Login from "./components/Login";
 import Register from "./components/Register";
 import Home from "./components/Home";
@@ -49,6 +50,7 @@ const App = () => {
             }}
           >
             <img
+              alt="description logo"
               src={logo}
               style={{
                 marginLeft: 100,
@@ -148,6 +150,7 @@ const App = () => {
             <Route exact path="/profileUpdate" component={ProfileUpdate} />
             <Route exact path="/dashboard" component={Dashboard} />
             <Route path="/user" component={BoardUser} />
+            <Route path="/groupPage" component={GroupPage} />
           </Switch>
         </div>
       </div>
